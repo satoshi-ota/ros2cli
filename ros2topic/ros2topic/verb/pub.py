@@ -139,6 +139,9 @@ def publisher(
 
     pub = node.create_publisher(msg_module, topic_name, qos_profile)
 
+    if values_dictionary['header']['stamp'] == 'now':
+        values_dictionary['header']['stamp'] = node.get_clock().now().to_msg()
+
     msg = msg_module()
     try:
         set_message_fields(msg, values_dictionary)
