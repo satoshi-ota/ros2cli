@@ -156,6 +156,7 @@ def publisher(
         count += 1
         if print_nth and count % print_nth == 0:
             print('publishing #%d: %r\n' % (count, msg))
+        msg.header.stamp = node.get_clock().now().to_msg()
         pub.publish(msg)
 
     timer = node.create_timer(period, timer_callback)
